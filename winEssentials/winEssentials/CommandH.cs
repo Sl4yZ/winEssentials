@@ -21,12 +21,16 @@ namespace winEssentials
                     Utile.WriteMsg("Affichage des processus ne répondant pas ...", 3);
 
                     List<ProcessManager.structProcess> processNotResponding = ProcessManager.getProcessNotResponding();
-
+                    int i = 0;
                     foreach (ProcessManager.structProcess sp in processNotResponding)
                     {
+                        
+                        i++;
                         found = true;
+                       
                        Utile.WriteMsg("ProcessName : " + sp.name + ".exe | ProcessID : " + sp.id, 3);
                     }
+                    Utile.WriteMsg(i + " processus trouvés.", 3);
                     bool finish = false;
 
                     if (!found)
@@ -73,11 +77,25 @@ namespace winEssentials
                         }
                     }
                 }
+                if (commandSplitted[0] == "clear") // decrash | length = 1
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine(".: winEssential v1 - Beta version :.");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine(".: Coded by Pakrologie & SlayZ :.");
+                    Console.WriteLine(".: Free version : Enjoy ! :.");
+                    Console.WriteLine("Type /help for list of commands available or visit our website : winEssential.tk");
+                    Console.WriteLine(" ");
+                    Console.ResetColor();
+                }
                 else
                 {
                     Utile.WriteMsg("Unknown command", 3);
                 }
             }
+
         }
+
     }
 }
