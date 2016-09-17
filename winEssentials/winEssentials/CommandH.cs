@@ -39,7 +39,7 @@ namespace winEssentials
 
                     while (!finish)
                     {
-                        Utile.WriteMsg("The kill command can only be used like this : 'kill all' or 'kill [processID]'", 3);
+                        Utile.WriteMsg("How to use the kill process command : 'kill all' or 'kill [processID]'", 3);
 
                         string commandKill = Console.ReadLine();
                         string[] commandKillSplitted = commandKill.Split(' ');
