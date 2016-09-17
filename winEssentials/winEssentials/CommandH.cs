@@ -17,58 +17,65 @@ namespace winEssentials
                 if (commandSplitted[0] == "decrash") // decrash | length = 1
                 {
                     bool found = false;
-                    Console.WriteLine("\\ Affichage des processus ne répondant pas //");
-                    Console.WriteLine("----------------------------------------------");
+
+                    Utile.WriteMsg("Affichage des processus ne répondant pas ...", 3);
 
                     List<ProcessManager.structProcess> processNotResponding = ProcessManager.getProcessNotResponding();
 
                     foreach (ProcessManager.structProcess sp in processNotResponding)
                     {
                         found = true;
-                        Console.WriteLine("NAME : " + sp.name + " ID : " + sp.id);
+                       Utile.WriteMsg("ProcessName : " + sp.name + ".exe | ProcessID : " + sp.id, 3);
                     }
-
-                    Console.WriteLine("----------------------------------------------");
                     bool finish = false;
 
                     if (!found)
+                    {
+                        Utile.WriteMsg("Aucun processus trouvé(s).", 3);
                         return;
+                    }
+                       
+                   
 
                     while (!finish)
                     {
-                        Console.WriteLine("' kill [id] ' kill the process with the id or ' kill ' kill all the process which don't responding");
+                        Utile.WriteMsg("The kill command can only be used like this : 'kill all' or 'kill [processID]'", 3);
 
                         string commandKill = Console.ReadLine();
                         string[] commandKillSplitted = commandKill.Split(' ');
 
-                        if (commandKillSplitted.Length == 1)
+                        if (commandKillSplitted.Length == 2)
                         {
-                            if (ProcessManager.killAllProcess())
-                            {
-                                Console.WriteLine("Finish");
-                            }
-                            else
-                                Console.WriteLine("Error : 0x01");
+                            int result = 0;
 
-                            finish = true;
-                        }
-                        else if (commandKillSplitted.Length == 2)
-                        {
-                            int result;
                             if (int.TryParse(commandKillSplitted[1], out result))
                             {
                                 if (ProcessManager.killProcessByID(result))
                                 {
-                                    Console.WriteLine("Finish");
+                                    Utile.WriteMsg("Finish", 1);
                                 }
                                 else
-                                    Console.WriteLine("Error : 0x03");
+                                    Utile.WriteMsg("Erreur: ID introuvable.", 2);
+
+                            }else if (commandKillSplitted[1] == "all")
+                            {
+                                if (ProcessManager.killAllProcess())
+                                {
+                                    Utile.WriteMsg("Finish", 1);
+                                }
+                                else
+                                    Utile.WriteMsg("Erreur : aucun processus n'est bloqué!", 2);
+
                             }
                             else
-                                Console.WriteLine("Error : 0x02");
+                                Utile.WriteMsg("Erreur : argument non reconnu!", 2);
                             finish = true;
                         }
                     }
+                }
+                else
+                {
+                    Utile.WriteMsg("Unknown command", 3);
                 }
             }
         }

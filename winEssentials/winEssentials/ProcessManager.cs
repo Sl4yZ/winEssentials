@@ -43,7 +43,7 @@ namespace winEssentials
 
             foreach (Process theprocess in processlist)
             {
-                if (theprocess.Id == id)
+                if (theprocess.Id == id && !theprocess.Responding)
                 {
                     theprocess.Kill();
                     return true;
