@@ -16,6 +16,7 @@ namespace winEssentials
             {
                 if (commandSplitted[0] == "decrash") // decrash | length = 1
                 {
+                    bool found = false;
                     Console.WriteLine("\\ Affichage des processus ne répondant pas //");
                     Console.WriteLine("----------------------------------------------");
 
@@ -23,11 +24,15 @@ namespace winEssentials
 
                     foreach (ProcessManager.structProcess sp in processNotResponding)
                     {
+                        found = true;
                         Console.WriteLine("NAME : " + sp.name + " ID : " + sp.id);
                     }
 
                     Console.WriteLine("----------------------------------------------");
                     bool finish = false;
+
+                    if (!found)
+                        return;
 
                     while (!finish)
                     {
@@ -38,12 +43,29 @@ namespace winEssentials
 
                         if (commandKillSplitted.Length == 1)
                         {
-                            //Kill tout les processus
+                            if (ProcessManager.killAllProcess())
+                            {
+                                Console.WriteLine("Finish");
+                            }
+                            else
+                                Console.WriteLine("Error : 0x01");
+
                             finish = true;
                         }
                         else if (commandKillSplitted.Length == 2)
                         {
-                            //Kill le processus avec l'id
+                            int result;
+                            if (int.TryParse(commandKillSplitted[1], out result))
+                            {
+                                if (ProcessManager.killProcessByID(result))
+                                {
+                                    Console.WriteLine("Finish");
+                                }
+                                else
+                                    Console.WriteLine("Error : 0x03");
+                            }
+                            else
+                                Console.WriteLine("Error : 0x02");
                             finish = true;
                         }
                     }
