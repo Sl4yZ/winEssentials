@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace winEssentials
 {
@@ -14,23 +15,30 @@ namespace winEssentials
 
             if (commandSplitted.Length >= 1)
             {
-                if (commandSplitted[0] == "decrash") // decrash | length = 1
+                if (commandSplitted[0] == "decrash" && 
+                    commandSplitted.Length == 1)
                 {
                     bool found = false;
 
                     Utile.WriteMsg("Affichage des processus ne répondant pas ...", 3);
 
                     List<ProcessManager.structProcess> processNotResponding = ProcessManager.getProcessNotResponding();
+
                     int i = 0;
+
                     foreach (ProcessManager.structProcess sp in processNotResponding)
                     {
-                        
-                        i++;
-                        found = true;
+                       i++;
+                       found = true;
                        
                        Utile.WriteMsg("ProcessName : " + sp.name + ".exe | ProcessID : " + sp.id, 3);
                     }
+
                     Utile.WriteMsg(i + " processus trouvé(s).", 3);
+                    if (!found)
+                    {
+                        return;
+                    }
                     bool finish = false;
 
                     while (!finish && found)
@@ -61,7 +69,6 @@ namespace winEssentials
                                 }
                                 else
                                     Utile.WriteMsg("Erreur : aucun processus n'est bloqué!", 2);
-
                             }
                             else
                                 Utile.WriteMsg("Erreur : argument non reconnu!", 2);
@@ -69,7 +76,8 @@ namespace winEssentials
                         }
                     }
                 }
-                else if (commandSplitted[0] == "clear") // clear | length = 1
+                else if (commandSplitted[0] == "clear" &&
+                         commandSplitted.Length == 1) // clear | length = 1
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -80,14 +88,24 @@ namespace winEssentials
                     Console.WriteLine("Type /help for list of commands available or visit our website : winEssential.tk");
                     Console.WriteLine(" ");
                     Console.ResetColor();
+                }else if (commandSplitted[0] == "open" &&
+                          commandSplitted.Length == 2)
+                {
+                    string url = commandSplitted[1];
+                    string WBrowser = WebBrowser.getDefault();
+                    if (WBrowser == "unknown")
+                    {
+                        Utile.WriteMsg("Le navigateur internet n'a pas pu être trouvé !", 2);
+                        return;
+                    }
+                    Process.Start(WBrowser, url);
+                    Utile.WriteMsg("Page ouverte avec succès !", 1);
                 }
                 else
                 {
                     Utile.WriteMsg("Unknown command", 3);
                 }
             }
-
         }
-
     }
 }
