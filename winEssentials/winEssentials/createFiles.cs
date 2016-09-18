@@ -45,13 +45,14 @@ namespace winEssentials
 
         public static string getFullText(string[] text)
         {
-            string body = "";
+            StringBuilder body = new StringBuilder();
+
             for (int i = 3; i < text.Length; i++)
             {
-                body += text[i];
-                body += " ";
+                body.Append(text[i] + " ");
+
             }
-            return body;
+            return body.ToString();
         }
     }
 }
