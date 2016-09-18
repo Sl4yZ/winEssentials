@@ -67,8 +67,6 @@ namespace winEssentials
                                 {
                                     Utile.WriteMsg("Finish", 1);
                                 }
-                                else
-                                    Utile.WriteMsg("Erreur : aucun processus n'est bloqué!", 2);
 
                             }
                             else
