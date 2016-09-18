@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandH.cs" />
-    <Compile Include="createFiles.cs" />
+    <Compile Include="CreateFiles.cs" />
     <Compile Include="ProcessManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

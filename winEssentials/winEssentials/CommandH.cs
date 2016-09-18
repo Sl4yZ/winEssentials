@@ -49,7 +49,7 @@ namespace winEssentials
                 }else if (commandSplitted[0] == "create" &&
                           commandSplitted.Length >= 4)
                 {
-                    createFiles.createText(commandSplitted[1], commandSplitted[2], commandSplitted);
+                    CreateFiles.createText(commandSplitted[1], commandSplitted[2], commandSplitted);
                 }
                 else
                 {

@@ -7,7 +7,7 @@ using System.IO;
 
 namespace winEssentials
 {
-    class createFiles
+    class CreateFiles
     {
         public static void createText(string chemin, string fileName, string[] text)
         {
