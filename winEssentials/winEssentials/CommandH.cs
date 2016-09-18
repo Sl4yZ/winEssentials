@@ -30,18 +30,10 @@ namespace winEssentials
                        
                        Utile.WriteMsg("ProcessName : " + sp.name + ".exe | ProcessID : " + sp.id, 3);
                     }
-                    Utile.WriteMsg(i + " processus trouvés.", 3);
+                    Utile.WriteMsg(i + " processus trouvé(s).", 3);
                     bool finish = false;
 
-                    if (!found)
-                    {
-                        Utile.WriteMsg("Aucun processus trouvé(s).", 3);
-                        return;
-                    }
-                       
-                   
-
-                    while (!finish)
+                    while (!finish && found)
                     {
                         Utile.WriteMsg("How to use the kill process command : 'kill all' or 'kill [processID]'", 3);
 
@@ -75,7 +67,7 @@ namespace winEssentials
                         }
                     }
                 }
-                if (commandSplitted[0] == "clear") // decrash | length = 1
+                else if (commandSplitted[0] == "clear") // clear | length = 1
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
