@@ -25,7 +25,7 @@ namespace winEssentials
                 case "IE.HTTP":
                     return "iexplore.exe";
             }
-            return "unknown";
+            return "unknown.exe";
         }
     }
 }
