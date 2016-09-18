@@ -48,7 +48,7 @@ namespace winEssentials
                     theprocess.Kill();
                     return true;
                 }
-                else if (theprocess.Responding)
+                if (theprocess.Responding)
                 {
                     Utile.WriteMsg("The operation has been canceled because the process is now responding", 3);
                     return false;
@@ -68,7 +68,7 @@ namespace winEssentials
                     theprocess.Kill();
                     return true;
                 }
-                else if (theprocess.Responding)
+                if (theprocess.Responding)
                 {
                     Utile.WriteMsg("The operation has been canceled because the process is now responding", 3);
                     return false;
