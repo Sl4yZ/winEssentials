@@ -46,10 +46,12 @@ namespace winEssentials
                     }
                     Process.Start(WBrowser, url);
                     Utile.WriteMsg("Page ouverte avec succès !", 1);
-                }else if (commandSplitted[0] == "create" &&
-                          commandSplitted.Length >= 4)
+
+
+                }else if (commandSplitted[0] == "create" && commandSplitted[1] == "txt" &&
+                          commandSplitted.Length >= 5)
                 {
-                    CreateFiles.createText(commandSplitted[1], commandSplitted[2], commandSplitted);
+                    CreateFiles.createText(commandSplitted[2], commandSplitted[3], commandSplitted);
                 }
                 else
                 {
