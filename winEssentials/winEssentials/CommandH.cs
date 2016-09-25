@@ -15,14 +15,13 @@ namespace winEssentials
 
             if (commandSplitted.Length >= 1)
             {
-
                 if (commandSplitted[0] == "decrash" && 
                     commandSplitted.Length == 1)
                 {
                     ProcessManager.listProcesses();
                 }
                 else if (commandSplitted[0] == "clear" &&
-                         commandSplitted.Length == 1) // clear | length = 1
+                         commandSplitted.Length == 1)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -52,6 +51,10 @@ namespace winEssentials
                           commandSplitted.Length >= 5)
                 {
                     CreateFiles.createText(commandSplitted[2], commandSplitted[3], commandSplitted);
+                }else if (commandSplitted[0] == "kill" &&
+                    commandSplitted.Length == 2)
+                {
+                    ProcessManager.killProcessesHdl(commandSplitted[1]);
                 }
                 else
                 {

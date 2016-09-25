@@ -20,12 +20,14 @@ namespace winEssentials
             Console.WriteLine("Type /help for list of commands available or visit our website : winEssential.tk");
             Console.WriteLine(" ");
             Console.ResetColor();
-            
+
             while (true)
             {
                 Utile.WriteMsg("Write your command : ");
                 winEssentials.CommandH.Redirect(Console.ReadLine());
             }
+
+            
         }
         
     }

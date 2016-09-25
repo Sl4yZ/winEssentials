@@ -39,43 +39,36 @@ namespace winEssentials
             {
                 return;
             }
-            bool finish = false;
 
-            while (!finish && found)
+            Utile.WriteMsg("How to use the kill process command : 'kill all' or 'kill [processID]'", 3);
+        }
+
+        public static void killProcessesHdl(string arg)
+        {
+
+            int result = 0;
+
+            if (int.TryParse(arg, out result))
             {
-                Utile.WriteMsg("How to use the kill process command : 'kill all' or 'kill [processID]'", 3);
-
-                string commandKill = Console.ReadLine();
-                string[] commandKillSplitted = commandKill.Split(' ');
-
-                if (commandKillSplitted.Length == 2)
+                if (ProcessManager.killProcessByID(result))
                 {
-                    int result = 0;
-
-                    if (int.TryParse(commandKillSplitted[1], out result))
-                    {
-                        if (ProcessManager.killProcessByID(result))
-                        {
-                            Utile.WriteMsg("Finish", 1);
-                        }
-                        else
-                            Utile.WriteMsg("Erreur: ID introuvable.", 2);
-
-                    }
-                    else if (commandKillSplitted[1] == "all")
-                    {
-                        if (ProcessManager.killAllProcess())
-                        {
-                            Utile.WriteMsg("Finish", 1);
-                        }
-                        else
-                            Utile.WriteMsg("Erreur : aucun processus n'est bloqué!", 2);
-                    }
-                    else
-                        Utile.WriteMsg("Erreur : argument non reconnu!", 2);
-                    finish = true;
+                    Utile.WriteMsg("Finish", 1);
                 }
+                else
+                    Utile.WriteMsg("Erreur: ID introuvable.", 2);
+
             }
+            else if (arg == "all")
+            {
+                if (ProcessManager.killAllProcess())
+                {
+                    Utile.WriteMsg("Finish", 1);
+                }
+                else
+                    Utile.WriteMsg("Erreur : aucun processus n'est bloqué!", 2);
+            }
+            else
+                Utile.WriteMsg("Erreur : argument non reconnu!", 2);
         }
 
         public static List<structProcess> getProcessNotResponding()
