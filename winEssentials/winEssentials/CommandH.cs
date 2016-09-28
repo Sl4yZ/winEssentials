@@ -12,58 +12,65 @@ namespace winEssentials
     {
         public static void Redirect(string command)
         {
-            string[] commandSplitted = command.Split(' ');
-
-            if (commandSplitted.Length >= 1)
+            try
             {
-                if (commandSplitted[0] == "decrash" && commandSplitted.Length == 1)
-                {
-                    ProcessManager.listProcesses();
-                }
-                else if (commandSplitted[0] == "clear" && commandSplitted.Length == 1)
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine(".: winEssential v1 - Beta version :.");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine(".: Coded by Pakrologie & SlayZ :.");
-                    Console.WriteLine(".: Free version : Enjoy ! :.");
-                    Console.WriteLine("Type /help for list of commands available or visit our website : winEssential.tk");
-                    Console.WriteLine(" ");
-                    Console.ResetColor();
+                string[] commandSplitted = command.Split(' ');
 
-                }
-                else if (commandSplitted[0] == "open" && commandSplitted.Length == 2)
+                if (commandSplitted.Length >= 1)
                 {
-                    string url = commandSplitted[1];
-                    string WBrowser = WebBrowsers.getDefault();
-                    if (WBrowser == "unknown")
+                    if (commandSplitted[0] == "decrash" && commandSplitted.Length == 1)
                     {
-                        Utile.WriteMsg("Le navigateur internet n'a pas pu être trouvé !", 2);
-                        return;
+                        ProcessManager.listProcesses();
                     }
-                    Process.Start(WBrowser, url);
-                    Utile.WriteMsg("Page ouverte avec succès !", 1);
-                }
-                else if (commandSplitted[0] == "create" && commandSplitted[1] == "txt" && commandSplitted.Length >= 5)
-                {
-                    CreateFiles.createText(commandSplitted[2], commandSplitted[3], commandSplitted);
-                }
-                else if (commandSplitted[0] == "kill" && commandSplitted.Length == 2)
-                {
-                    ProcessManager.killProcessesHdl(commandSplitted[1]);
-                }
-                else if (commandSplitted[0] == "mp3" && commandSplitted[1] == "ytb" && commandSplitted[2].StartsWith("https://www.youtube.com/watch?v=")
-                    && commandSplitted.Length == 3)
-                {
-                    YoutubeAudio.downloadAudio(commandSplitted[2]);
-                }
-                else
-                {
-                    Utile.WriteMsg("Unknown command", 3);
-                }
+                    else if (commandSplitted[0] == "clear" && commandSplitted.Length == 1)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine(".: winEssential v1 - Beta version :.");
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine(".: Coded by Pakrologie & SlayZ :.");
+                        Console.WriteLine(".: Free version : Enjoy ! :.");
+                        Console.WriteLine("Type /help for list of commands available or visit our website : winEssential.tk");
+                        Console.WriteLine(" ");
+                        Console.ResetColor();
 
+                    }
+                    else if (commandSplitted[0] == "open" && commandSplitted.Length == 2)
+                    {
+                        string url = commandSplitted[1];
+                        string WBrowser = WebBrowsers.getDefault();
+                        if (WBrowser == "unknown")
+                        {
+                            Utile.WriteMsg("Le navigateur internet n'a pas pu être trouvé !", 2);
+                            return;
+                        }
+                        Process.Start(WBrowser, url);
+                        Utile.WriteMsg("Page ouverte avec succès !", 1);
+                    }
+                    else if (commandSplitted[0] == "create" && commandSplitted[1] == "txt" && commandSplitted.Length >= 5)
+                    {
+                        CreateFiles.createText(commandSplitted[2], commandSplitted[3], commandSplitted);
+                    }
+                    else if (commandSplitted[0] == "kill" && commandSplitted.Length == 2)
+                    {
+                        ProcessManager.killProcessesHdl(commandSplitted[1]);
+                    }
+                    else if (commandSplitted[0] == "mp3" && commandSplitted[1] == "ytb" && commandSplitted[2].StartsWith("https://www.youtube.com/watch?v=")
+                        && commandSplitted.Length == 3)
+                    {
+                        YoutubeAudio.downloadAudio(commandSplitted[2]);
+                    }
+                    else
+                    {
+                        Utile.WriteMsg("Unknown command", 3);
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                Utile.WriteMsg("Unknown command", 3);
+            }
+
         }
     }
 }
