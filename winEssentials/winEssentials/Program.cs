@@ -10,6 +10,7 @@ namespace winEssentials
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;

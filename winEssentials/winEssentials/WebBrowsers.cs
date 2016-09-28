@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace winEssentials
 {
-    class WebBrowser
+    class WebBrowsers
     {
         public static string getDefault()
         {

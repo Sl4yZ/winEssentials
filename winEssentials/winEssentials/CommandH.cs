@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Threading;
 
 namespace winEssentials
 {
@@ -15,13 +16,11 @@ namespace winEssentials
 
             if (commandSplitted.Length >= 1)
             {
-                if (commandSplitted[0] == "decrash" && 
-                    commandSplitted.Length == 1)
+                if (commandSplitted[0] == "decrash" && commandSplitted.Length == 1)
                 {
                     ProcessManager.listProcesses();
                 }
-                else if (commandSplitted[0] == "clear" &&
-                         commandSplitted.Length == 1)
+                else if (commandSplitted[0] == "clear" && commandSplitted.Length == 1)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -33,11 +32,11 @@ namespace winEssentials
                     Console.WriteLine(" ");
                     Console.ResetColor();
 
-                }else if (commandSplitted[0] == "open" &&
-                          commandSplitted.Length == 2)
+                }
+                else if (commandSplitted[0] == "open" && commandSplitted.Length == 2)
                 {
                     string url = commandSplitted[1];
-                    string WBrowser = WebBrowser.getDefault();
+                    string WBrowser = WebBrowsers.getDefault();
                     if (WBrowser == "unknown")
                     {
                         Utile.WriteMsg("Le navigateur internet n'a pas pu être trouvé !", 2);
@@ -45,16 +44,19 @@ namespace winEssentials
                     }
                     Process.Start(WBrowser, url);
                     Utile.WriteMsg("Page ouverte avec succès !", 1);
-
-
-                }else if (commandSplitted[0] == "create" && commandSplitted[1] == "txt" &&
-                          commandSplitted.Length >= 5)
+                }
+                else if (commandSplitted[0] == "create" && commandSplitted[1] == "txt" && commandSplitted.Length >= 5)
                 {
                     CreateFiles.createText(commandSplitted[2], commandSplitted[3], commandSplitted);
-                }else if (commandSplitted[0] == "kill" &&
-                    commandSplitted.Length == 2)
+                }
+                else if (commandSplitted[0] == "kill" && commandSplitted.Length == 2)
                 {
                     ProcessManager.killProcessesHdl(commandSplitted[1]);
+                }
+                else if (commandSplitted[0] == "mp3" && commandSplitted[1] == "ytb" && commandSplitted[2].StartsWith("https://www.youtube.com/watch?v=")
+                    && commandSplitted.Length == 3)
+                {
+                    YoutubeAudio.downloadAudio(commandSplitted[2]);
                 }
                 else
                 {

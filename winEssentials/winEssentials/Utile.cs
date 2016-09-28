@@ -27,5 +27,29 @@ namespace winEssentials
             Console.WriteLine("-> " + text);
             Console.ForegroundColor = ConsoleColor.White;
         }
+
+        public static string getPathByCode(string chemin)
+        {
+            string path = chemin;
+            switch (chemin)
+            {
+                case "desk":
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    break;
+                case "doc":
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    break;
+                case "music":
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                    break;
+                case "picture":
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                    break;
+                case "video":
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+                    break;
+            }
+            return path;
+        }
     }
 }
