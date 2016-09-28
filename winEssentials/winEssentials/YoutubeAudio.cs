@@ -42,19 +42,20 @@ namespace winEssentials
 
                         if (count == 0)
                         {
+                            Utile.WriteMsg("La vidéo a été trouvé, le téléchargement a été enclenché !", 1);
                             wb.Navigate(urlDownload);
                         }else if (count == 3)
                         {
                             completed = true;
                         }
 
-                        Thread.Sleep(500);
+                        Thread.Sleep(200);
 
                         count++;
                     }
                     Application.DoEvents();
 
-                    Thread.Sleep(300);
+                    Thread.Sleep(100);
                     if (errorFound)
                     {
                         Utile.WriteMsg("Votre vidéo ne doit pas dépasser 20 minutes et ne doit pas être soumis à des droits d'auteurs, impossible de télécharger !", 2);
@@ -67,8 +68,6 @@ namespace winEssentials
                 urlFound = false;
                 errorFound = false;
                 wb.Refresh();
-
-                Utile.WriteMsg("La vidéo a été trouvé, le téléchargement a été enclenché !", 1);
             }
             catch(Exception ex)
             {
