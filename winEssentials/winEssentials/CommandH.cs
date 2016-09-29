@@ -18,7 +18,7 @@ namespace winEssentials
 
                 if (commandSplitted.Length >= 1)
                 {
-                    if (commandSplitted[0] == "decrash" && commandSplitted.Length == 1)
+                    if (commandSplitted[0] == "uncrash" && commandSplitted.Length == 1)
                     {
                         ProcessManager.listProcesses();
                     }
@@ -55,11 +55,20 @@ namespace winEssentials
                     {
                         ProcessManager.killProcessesHdl(commandSplitted[1]);
                     }
-                    else if (commandSplitted[0] == "mp3" && commandSplitted[1] == "ytb" && (commandSplitted[2].StartsWith("https://www.youtube.com/watch?v=") || 
+                    else if (commandSplitted[0] == "download" && commandSplitted[1] == "youtube" && commandSplitted[2] == "mp3" && (commandSplitted[3].StartsWith("https://www.youtube.com/watch?v=") || 
                         commandSplitted[2].StartsWith("http://www.youtube.com/watch?v="))
-                        && commandSplitted.Length == 3)
+                        && commandSplitted.Length == 4)
                     {
                         YoutubeAudio.downloadAudio(commandSplitted[2]);
+                    }
+                    else if (commandSplitted[0] == "help")
+                    {
+                        Utile.WriteMsg("____________________________________");
+                        Utile.WriteMsg("Open a webpage : open OR open <url>");
+                        Utile.WriteMsg("Create a text file : create txt <desk|doc|music|picture|video> <fileName> <content>");
+                        Utile.WriteMsg("List processes that are not responding : uncrash");
+                        Utile.WriteMsg("Download an MP3 from YouTube : download youtube mp3 <url>");
+                        Utile.WriteMsg("_____________________________________");
                     }
                     else
                     {
