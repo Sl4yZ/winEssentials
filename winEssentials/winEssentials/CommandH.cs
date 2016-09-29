@@ -55,7 +55,8 @@ namespace winEssentials
                     {
                         ProcessManager.killProcessesHdl(commandSplitted[1]);
                     }
-                    else if (commandSplitted[0] == "mp3" && commandSplitted[1] == "ytb" && commandSplitted[2].StartsWith("https://www.youtube.com/watch?v=")
+                    else if (commandSplitted[0] == "mp3" && commandSplitted[1] == "ytb" && (commandSplitted[2].StartsWith("https://www.youtube.com/watch?v=") || 
+                        commandSplitted[2].StartsWith("http://www.youtube.com/watch?v="))
                         && commandSplitted.Length == 3)
                     {
                         YoutubeAudio.downloadAudio(commandSplitted[2]);

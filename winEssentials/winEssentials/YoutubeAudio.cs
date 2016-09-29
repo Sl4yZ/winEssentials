@@ -48,7 +48,6 @@ namespace winEssentials
                         {
                             completed = true;
                         }
-
                         Thread.Sleep(200);
 
                         count++;
@@ -59,6 +58,12 @@ namespace winEssentials
                     if (errorFound)
                     {
                         Utile.WriteMsg("Votre vidéo ne doit pas dépasser 20 minutes et ne doit pas être soumis à des droits d'auteurs, impossible de télécharger !", 2);
+
+                        errorFound = false;
+                        completed = false;
+                        count = 0;
+                        urlFound = false;
+                        wb.Refresh();
                         return;
                     }
                 }
@@ -66,7 +71,7 @@ namespace winEssentials
                 completed = false;
                 count = 0;
                 urlFound = false;
-                errorFound = false;
+               
                 wb.Refresh();
             }
             catch(Exception ex)
@@ -84,19 +89,20 @@ namespace winEssentials
                 wb.Document.GetElementById("submit").InvokeMember("click");
 
                 string stateInfos = wb.Document.GetElementById("progress_info").OuterHtml;
-                
+
                 if (stateInfos.Split('<')[3].Split(' ').Length > 1)
                 {
                     errorFound = true;
                     return;
                 }
 
-                   HtmlElement download_link = wb.Document.GetElementById("dl_link");
+                HtmlElement download_link = wb.Document.GetElementById("dl_link");
                 HtmlElementCollection links = download_link.GetElementsByTagName("a");
 
                 for (int i = 0; i < links.Count; i++)
                 {
                     string linkFound = links[i].GetAttribute("href");
+  
                     if (linkFound.Contains("create"))
                     {
                         urlDownload = linkFound;
