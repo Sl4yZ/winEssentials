@@ -40,13 +40,17 @@ namespace winEssentials
         }
         static void updateTimer_Tick(Object o)
         {
-            Console.Title = "winEssentials | CPU Usage: " +
-            InitialiseCPUCounter();
-          
-
-            Console.Title += " RAM Usage: " + InitializeRAMCounter();
+            Console.Title = "winEssentials |";
+            Console.Title += " Computer RAM Usage: " + (Convert.ToInt32( ConvertBytesToMegabytes(GetTotalMemoryInBytes())) - InitializeRAMCounter()) + "/" + Convert.ToInt32(ConvertBytesToMegabytes(GetTotalMemoryInBytes())) + " MB";
         }
-
+        static double ConvertBytesToMegabytes(ulong bytes)
+        {
+            return (bytes / 1024f) / 1024f;
+        }
+        static ulong GetTotalMemoryInBytes()
+        {
+            return new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory;
+        }
 
         public static string InitialiseCPUCounter()
         {
@@ -59,11 +63,11 @@ namespace winEssentials
             return cpuCounter.NextValue() + "% |";
         }
 
-        public static string InitializeRAMCounter()
+        public static int InitializeRAMCounter()
         {
             PerformanceCounter ramCounter;
             ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            return ramCounter.NextValue() + " MB";
+            return Convert.ToInt32(ramCounter.NextValue());
 
         }
 
