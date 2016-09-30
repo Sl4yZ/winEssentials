@@ -13,6 +13,8 @@ namespace winEssentials
         [STAThread]
         static void Main(string[] args)
         {
+            string fileName = AppDomain.CurrentDomain.FriendlyName;
+            Console.WriteLine(fileName.Replace(".exe", ""));
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(".: winEssential v1 - Beta version :.");
             Console.ForegroundColor = ConsoleColor.DarkYellow;

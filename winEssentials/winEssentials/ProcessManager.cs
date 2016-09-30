@@ -92,6 +92,26 @@ namespace winEssentials
             return processNotResponding;
         }
 
+        public static void cleanDesktop()
+        {
+            string fileName = AppDomain.CurrentDomain.FriendlyName;
+            foreach (Process p in Process.GetProcesses())
+            {
+                try
+                {
+                    if (p.ProcessName != "explorer" && p.ProcessName != fileName.Replace(".exe", "")
+                        && !p.ProcessName.Contains("Microsoft") && !p.ProcessName.Contains("Windows")
+                        && p.ProcessName != "sihost")
+                    {
+                        p.Kill();
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
         public static bool killProcessByID(int id)
         {
             Process[] processlist = Process.GetProcesses();
